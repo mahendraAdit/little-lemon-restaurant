@@ -8,14 +8,14 @@ import Main from './component/Main';
 function App() {
   return (
     <>
-      <Grid templateRows={"auto 1fr 60px"} gap={6} minH={'120vh'}>
-        <GridItem mt={3} mx={10}>
+      <Grid templateRows={"auto 1fr auto"} gap={6}>
+        <GridItem mt={30} px={10}>
           <Header />
         </GridItem>
-        <GridItem px={10}>
+        <GridItem px={10} >
           <Main />
         </GridItem>
-        <GridItem bg={"yellow.500"} minH={'30vh'} py={10} px={20}>
+        <GridItem bg={"gray"} py={10} px={20} h={'fit-content'} w={'100%'}>
           <Footer />
         </GridItem>
 

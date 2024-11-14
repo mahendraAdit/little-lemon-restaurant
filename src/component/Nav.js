@@ -7,7 +7,7 @@ function Nav() {
     const isDesktop = useBreakpointValue({ base: false, md: true });
 
     return (
-        <Box as={'nav'} w={'100%'} py={3}>
+        <Box as={'nav'} py={3}>
             {isDesktop ? (
                 <HStack w={'auto'} justify="space-between" align={'center'}>
                     <HStack spacing={4}>
@@ -27,11 +27,9 @@ function Nav() {
                     </Group>
                 </HStack>) : (
 
-                <Flex as={'nav'} justify={'space-between'} align={'center'} wrap={'wrap'}>
+                <Flex as={'nav'} justify={'space-between'} align={'center'}>
                     <Image src={imgSrc} alt="logo" />
                     <HStack>
-
-
                         <DrawerRoot>
                             <DrawerBackdrop />
                             <DrawerTrigger asChild>
@@ -39,8 +37,8 @@ function Nav() {
                                     Menu
                                 </Button>
                             </DrawerTrigger>
-                            <DrawerContent right={0} top={0} position={'absolute'} minH={'40vh'}>
-                                <DrawerHeader>
+                            <DrawerContent position={'fixed'} top={0} minH={'40vh'} right={0} >
+                                <DrawerHeader >
                                     <HStack display={'flex'} justify={'space-between'}>
                                         <DrawerTitle>
                                             <Image src={imgSrc} alt="logo" />
