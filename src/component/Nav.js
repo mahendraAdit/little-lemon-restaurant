@@ -4,7 +4,6 @@ import {
 import { ColorModeButton } from "../components/ui/color-mode";
 function Nav() {
     const imgSrc = '/assets/little-lemon-logo.svg';
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const isDesktop = useBreakpointValue({ base: false, md: true });
 
     return (
@@ -53,20 +52,20 @@ function Nav() {
 
                                 </DrawerHeader>
                                 <DrawerBody>
-                                    <VStack gap={5}>
-                                        <Button w={'100%'}>
+                                    <VStack gap={3}>
+                                        <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Home
                                         </Button>
-                                        <Button w={'100%'}>
+                                        <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Menu
                                         </Button>
-                                        <Button w={'100%'}>
+                                        <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Reservations
                                         </Button>
-                                        <Button w={'100%'}>
+                                        <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Order Online
                                         </Button>
-                                        <Button w={'100%'}>
+                                        <Button w={'100%'} size={'xl'}>
                                             Login
                                         </Button>
                                     </VStack>

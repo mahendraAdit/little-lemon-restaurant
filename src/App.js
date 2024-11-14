@@ -15,7 +15,7 @@ function App() {
         <GridItem px={10}>
           <Main />
         </GridItem>
-        <GridItem bg={"yellow.500"} minH={'25vh'} py={10} px={20}>
+        <GridItem bg={"yellow.500"} minH={'30vh'} py={10} px={20}>
           <Footer />
         </GridItem>
 

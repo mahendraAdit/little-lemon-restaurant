@@ -16,7 +16,7 @@ function Main() {
                         <Text color={'white'} textStyle={'xl'} mt={5}>
                             We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twists.
                         </Text>
-                        <Button mt={2}>
+                        <Button mt={4} size={'xl'}>
                             Reserve a Table
                         </Button>
                     </GridItem>
