@@ -5,8 +5,21 @@ import {
     Box,
     HStack,
     Card,
-    useBreakpointValue
+    useBreakpointValue,
+    VStack,
+    Group,
+    Stack,
+    Span
 } from "@chakra-ui/react";
+import {
+    TimelineConnector,
+    TimelineContent,
+    TimelineDescription,
+    TimelineIndicator,
+    TimelineItem,
+    TimelineRoot,
+    TimelineTitle,
+} from "../components/ui/timeline";
 
 function Main() {
     const heroImg = '/assets/restaurantfood.jpg';
@@ -90,10 +103,126 @@ function Main() {
                     </HStack>
 
                 </GridItem >
-                <GridItem bg={'red'} px={10}>
-                    <Heading>
-                        About us
-                    </Heading>
+                <GridItem bg={'red'} p={10}>
+                    <HStack align={'start'} wrap={isDesktop ? 'nowrap' : 'wrap'}>
+                        <Stack placeSelf={'center'}>
+                            <Heading as={'h2'} size={'5xl'} display={'inline-block'}>
+                                About Us
+                            </Heading>
+                            <Text>
+                                We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twists.
+                            </Text>
+                        </Stack>
+
+                        <HStack justify={'center'}>
+                            <Image src={heroImg} h={isDesktop ? 'xl' : 'xxs'} w={isDesktop ? 'xl' : '200'} rounded={'xl'} />
+                        </HStack>
+
+
+                    </HStack>
+
+                </GridItem >
+                <GridItem p={10}>
+                    <HStack align={'start'} wrap={isDesktop ? 'nowrap' : 'wrap'}>
+                        <Stack placeSelf={'center'}>
+                            <Heading as={'h2'} size={'5xl'} display={'inline-block'}>
+                                Our History
+                            </Heading>
+                            <Text>
+                                Founded by the Vasquez family in 2005, Little Lemon began as a small neighborhood eatery, offering traditional Mediterranean dishes made with love and fresh local ingredients. Over the years, it has grown into a beloved local hotspot, where guests enjoy both iconic Mediterranean recipes and innovative twists on old classics.
+                            </Text>
+                        </Stack>
+                        <TimelineRoot size="md" variant="outline">
+                            <TimelineItem>
+                                <TimelineContent flex="1" />
+                                <TimelineConnector />
+                                <TimelineContent flex="1">
+                                    <TimelineTitle>
+                                        2005 – The Beginning
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon opens its doors in a small corner of the city
+                                    </TimelineDescription>
+                                </TimelineContent>
+                            </TimelineItem>
+
+                            <TimelineItem>
+                                <TimelineContent flex="1" alignItems="flex-end">
+                                    <TimelineTitle>
+                                        2007 – The First Expansion:
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon expands to a larger location to accommodate growing demand,
+                                    </TimelineDescription>
+                                </TimelineContent>
+                                <TimelineConnector />
+                                <TimelineContent flex="1" />
+                            </TimelineItem>
+
+                            <TimelineItem>
+                                <TimelineContent flex="1" />
+                                <TimelineConnector />
+                                <TimelineContent flex="1">
+                                    <TimelineTitle>
+                                        2010 – Introducing Farm-to-Table
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon begins sourcing ingredients directly from local farms
+                                    </TimelineDescription>
+                                </TimelineContent>
+                            </TimelineItem>
+                            <TimelineItem>
+                                <TimelineContent flex="1" alignItems="flex-end">
+                                    <TimelineTitle>
+                                        2013 – Launch of Online Ordering
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon introduces an online ordering system
+                                    </TimelineDescription>
+                                </TimelineContent>
+                                <TimelineConnector />
+                                <TimelineContent flex="1" />
+                            </TimelineItem>
+                            <TimelineItem>
+                                <TimelineContent flex="1" />
+                                <TimelineConnector />
+                                <TimelineContent flex="1">
+                                    <TimelineTitle>
+                                        2015 – First Catering Event
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon begins offering catering services for events
+                                    </TimelineDescription>
+                                </TimelineContent>
+                            </TimelineItem>
+                            <TimelineItem>
+                                <TimelineContent flex="1" alignItems="flex-end">
+                                    <TimelineTitle>
+                                        2018 – Recognized for Excellence
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon receives multiple awards for best Mediterranean cuisine in the city
+                                    </TimelineDescription>
+                                </TimelineContent>
+                                <TimelineConnector />
+                                <TimelineContent flex="1" />
+                            </TimelineItem><TimelineItem>
+                                <TimelineContent flex="1" />
+                                <TimelineConnector />
+                                <TimelineContent flex="1">
+                                    <TimelineTitle>
+                                        2023 – Expanding the Brand:
+                                    </TimelineTitle>
+                                    <TimelineDescription>
+                                        Little Lemon launches a second location, bringing its signature flavors to new communities.
+                                    </TimelineDescription>
+                                </TimelineContent>
+                            </TimelineItem>
+
+                        </TimelineRoot>
+
+
+                    </HStack>
                 </GridItem>
 
             </Grid >
