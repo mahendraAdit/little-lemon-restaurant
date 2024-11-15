@@ -1,0 +1,6 @@
+.datePicker:hover {
+    cursor: pointer;
+    background-color: antiquewhite;
+    animation: 1s ease-in;
+    transition: all;
+}

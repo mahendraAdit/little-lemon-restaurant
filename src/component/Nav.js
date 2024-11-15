@@ -1,7 +1,8 @@
 import {
-    Box, HStack, Link, Group, Image, useDisclosure, useBreakpointValue, Flex, IconButton, Stack, Drawer, DrawerBody, DrawerContent, DrawerHeader, Button, DrawerRoot, DrawerBackdrop, DrawerTrigger, DrawerActionTrigger, DrawerTitle, DrawerFooter, DrawerCloseTrigger, VStack
+    Box, HStack, Group, Image, useDisclosure, useBreakpointValue, Flex, IconButton, Stack, Drawer, DrawerBody, DrawerContent, DrawerHeader, Button, DrawerRoot, DrawerBackdrop, DrawerTrigger, DrawerActionTrigger, DrawerTitle, DrawerFooter, DrawerCloseTrigger, VStack
 } from "@chakra-ui/react";
 import { ColorModeButton } from "../components/ui/color-mode";
+import { Link } from 'react-router-dom';
 function Nav() {
     const imgSrc = '/assets/little-lemon-logo.svg';
     const isDesktop = useBreakpointValue({ base: false, md: true });
@@ -15,13 +16,32 @@ function Nav() {
                             <Image src={imgSrc} alt="logo" />
                         </a>
                     </HStack>
-                    <Group gap={5}>
-                        <Link>Home</Link>
-                        <Link>About</Link>
-                        <Link>Menu</Link>
-                        <Link>Reservations</Link>
-                        <Link>Order Online</Link>
-                        <Link>Login</Link>
+                    <Group gap={1}>
+                        <Link to={'/'}>
+                            <Button variant={'ghost'}>
+                                Home
+                            </Button>
+                        </Link>
+                        <Link to={'/'}>
+                            <Button variant={'ghost'}>
+                                Menu
+                            </Button>
+                        </Link>
+                        <Link to={'/reservation'}>
+                            <Button variant={'ghost'}>
+                                Reservations
+                            </Button>
+                        </Link>
+                        <Link to={'/reservation'}>
+                            <Button variant={'ghost'}>
+                                Order Online
+                            </Button>
+                        </Link>
+                        <Link to={'/'}>
+                            <Button variant={'solid'}>
+                                Login
+                            </Button>
+                        </Link>
 
                         <ColorModeButton />
                     </Group>
