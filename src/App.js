@@ -5,6 +5,7 @@ import Header from './component/Header';
 import Main from './component/Main';
 import { Route, Routes } from 'react-router-dom';
 import Reservation from './page/Reservation';
+import { Toaster } from './components/ui/toaster';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/reservation' element={<Reservation />} />
+
           </Routes>
         </GridItem>
         <GridItem bg={"gray"} py={10} px={20} h={'fit-content'} w={'100%'} mb={'auto'}>
@@ -25,6 +27,7 @@ function App() {
         </GridItem>
 
       </Grid >
+      <Toaster />
     </>
 
   )

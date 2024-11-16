@@ -9,7 +9,6 @@ import {
     VStack,
     Group,
     Stack,
-    Span
 } from "@chakra-ui/react";
 import {
     TimelineConnector,
@@ -20,6 +19,8 @@ import {
     TimelineRoot,
     TimelineTitle,
 } from "../components/ui/timeline";
+import { Link } from 'react-router-dom';
+
 
 function Main() {
     const heroImg = '/assets/restaurantfood.jpg';
@@ -41,9 +42,11 @@ function Main() {
                             <Text color={'white'} textStyle={'xl'} mt={5}>
                                 We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twists.
                             </Text>
-                            <Button mt={4} size={'xl'}>
-                                Reserve a Table
-                            </Button>
+                            <Link to={'/reservation'}>
+                                <Button variant={'solid'} size={'xl'}>
+                                    Reservations
+                                </Button>
+                            </Link>
                         </GridItem>
                         <GridItem display={'flex'} alignItems={'center'} justifyContent={"center"}>
                             <Image src={heroImg} rounded={'xl'} alt="hero-image" h={450} />
@@ -149,7 +152,7 @@ function Main() {
                             <TimelineItem>
                                 <TimelineContent flex="1" alignItems="flex-end">
                                     <TimelineTitle>
-                                        2007 – The First Expansion:
+                                        2007 - The First Expansion:
                                     </TimelineTitle>
                                     <TimelineDescription>
                                         Little Lemon expands to a larger location to accommodate growing demand,

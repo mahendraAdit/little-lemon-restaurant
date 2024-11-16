@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .datePicker:hover {
     cursor: pointer;
     background-color: antiquewhite;

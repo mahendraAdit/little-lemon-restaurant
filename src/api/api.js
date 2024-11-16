@@ -9,24 +9,39 @@ const seededRandom = function (seed) {
 };
 
 export const fetchAPI = function (date) {
-    let result = [];
-    let random = seededRandom(date.getDate());
+    if (date) {
+        let result = [];
+        let random = seededRandom(date.getDate());
 
-    for (let i = 17; i <= 23; i++) {
-        if (random() < 0.5) {
-            result.push(i + ':00');
+        for (let i = 17; i <= 23; i++) {
+            if (random() < 0.5) {
+                result.push(i + ':00');
+            }
+            if (random() < 0.5) {
+                result.push(i + ':30');
+            }
         }
-        if (random() < 0.5) {
-            result.push(i + ':30');
+        return result;
+    } else {
+        return {
+            message: 'invalid request'
         }
     }
-    return result;
+
 };
 
 export const submitAPI = function (formData) {
+    console.log(`submitAPI called, received data: ${JSON.stringify(formData)}`)
     return {
         success: true,
         message: "Reservation submitted successfully",
-        data: formData
+        name: formData.name,
+        payment: formData.payment,
+        email: formData.email,
+        location: formData.location,
+        person: formData.person,
+        date: formData.date,
+        day: formData.day
+        // data: formData
     }
 };

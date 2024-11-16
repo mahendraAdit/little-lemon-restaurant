@@ -71,15 +71,18 @@ function Nav() {
                                 </DrawerHeader>
                                 <DrawerBody>
                                     <VStack gap={3}>
+
                                         <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Home
                                         </Button>
                                         <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Menu
                                         </Button>
+
                                         <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Reservations
                                         </Button>
+
                                         <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Order Online
                                         </Button>
