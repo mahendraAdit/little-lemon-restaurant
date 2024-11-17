@@ -29,17 +29,17 @@ function Main() {
     const isDesktop = useBreakpointValue({ base: false, md: true });
     return (
         <>
-            <Grid as={'main'} py={10} gap={10}>
+            <Grid as={'main'} py={10} gap={10} >
                 <GridItem as={'section'} bg={"#394C45"} maxH={'fit-content'}>
                     <Grid templateColumns={columns} p={10}>
                         <GridItem >
-                            <Heading size={'3xl'} color={'#B5960F'}>
+                            <Heading size={'4xl'} color={'#B5960F'}>
                                 Little Lemon
                             </Heading>
-                            <Text color={'white'} textStyle={'3xl'}>
+                            <Text color={'white'} textStyle={'2xl'}>
                                 Chicago
                             </Text>
-                            <Text color={'white'} textStyle={'xl'} mt={5}>
+                            <Text color={'white'} textStyle={'lg'} mt={5}>
                                 We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twists.
                             </Text>
                             <Link to={'/reservation'}>
@@ -48,8 +48,8 @@ function Main() {
                                 </Button>
                             </Link>
                         </GridItem>
-                        <GridItem display={'flex'} alignItems={'center'} justifyContent={"center"}>
-                            <Image src={heroImg} rounded={'xl'} alt="hero-image" h={450} />
+                        <GridItem display={'flex'} alignItems={'center'} justifyContent={"center"} hidden={isDesktop ? false : true}>
+                            <Image src={heroImg} rounded={'xl'} alt="hero-image" h={450} w={700} />
                         </GridItem>
                     </Grid>
 
@@ -60,7 +60,9 @@ function Main() {
 
                     <HStack justify={'space-between'}>
                         <Text fontSize={'3xl'}>Our Special</Text>
-                        <Button variant={'solid'}>See Menu</Button>
+                        <Button variant={'solid'} bg={'#B5960F'}>
+                            See Menu
+                        </Button>
                     </HStack>
                     <HStack justify={'center'} wrap={isDesktop ? 'nowrap' : 'wrap'} gap={6}>
                         <Card.Root my={10} rounded={'xl'}>
@@ -106,25 +108,6 @@ function Main() {
                     </HStack>
 
                 </GridItem >
-                <GridItem bg={'red'} p={10}>
-                    <HStack align={'start'} wrap={isDesktop ? 'nowrap' : 'wrap'}>
-                        <Stack placeSelf={'center'}>
-                            <Heading as={'h2'} size={'5xl'} display={'inline-block'}>
-                                About Us
-                            </Heading>
-                            <Text>
-                                We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twists.
-                            </Text>
-                        </Stack>
-
-                        <HStack justify={'center'}>
-                            <Image src={heroImg} h={isDesktop ? 'xl' : 'xxs'} w={isDesktop ? 'xl' : '200'} rounded={'xl'} />
-                        </HStack>
-
-
-                    </HStack>
-
-                </GridItem >
                 <GridItem p={10}>
                     <HStack align={'start'} wrap={isDesktop ? 'nowrap' : 'wrap'}>
                         <Stack placeSelf={'center'}>
@@ -140,7 +123,7 @@ function Main() {
                                 <TimelineContent flex="1" />
                                 <TimelineConnector />
                                 <TimelineContent flex="1">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'} >
                                         2005 – The Beginning
                                     </TimelineTitle>
                                     <TimelineDescription>
@@ -151,7 +134,7 @@ function Main() {
 
                             <TimelineItem>
                                 <TimelineContent flex="1" alignItems="flex-end">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'}>
                                         2007 - The First Expansion:
                                     </TimelineTitle>
                                     <TimelineDescription>
@@ -166,7 +149,7 @@ function Main() {
                                 <TimelineContent flex="1" />
                                 <TimelineConnector />
                                 <TimelineContent flex="1">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'}>
                                         2010 – Introducing Farm-to-Table
                                     </TimelineTitle>
                                     <TimelineDescription>
@@ -176,7 +159,7 @@ function Main() {
                             </TimelineItem>
                             <TimelineItem>
                                 <TimelineContent flex="1" alignItems="flex-end">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'}>
                                         2013 – Launch of Online Ordering
                                     </TimelineTitle>
                                     <TimelineDescription>
@@ -190,7 +173,7 @@ function Main() {
                                 <TimelineContent flex="1" />
                                 <TimelineConnector />
                                 <TimelineContent flex="1">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'}>
                                         2015 – First Catering Event
                                     </TimelineTitle>
                                     <TimelineDescription>
@@ -200,7 +183,7 @@ function Main() {
                             </TimelineItem>
                             <TimelineItem>
                                 <TimelineContent flex="1" alignItems="flex-end">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'}>
                                         2018 – Recognized for Excellence
                                     </TimelineTitle>
                                     <TimelineDescription>
@@ -213,7 +196,7 @@ function Main() {
                                 <TimelineContent flex="1" />
                                 <TimelineConnector />
                                 <TimelineContent flex="1">
-                                    <TimelineTitle>
+                                    <TimelineTitle color={'#B5960F'}>
                                         2023 – Expanding the Brand:
                                     </TimelineTitle>
                                     <TimelineDescription>

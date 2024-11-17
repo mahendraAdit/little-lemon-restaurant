@@ -31,7 +31,7 @@ export const fetchAPI = function (date) {
 };
 
 export const submitAPI = function (formData) {
-    console.log(`submitAPI called, received data: ${JSON.stringify(formData)}`)
+    // console.log(`submitAPI called, received data: ${JSON.stringify(formData)}`)
     return {
         success: true,
         message: "Reservation submitted successfully",

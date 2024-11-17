@@ -38,7 +38,7 @@ function Nav() {
                             </Button>
                         </Link>
                         <Link to={'/'}>
-                            <Button variant={'solid'}>
+                            <Button variant={'solid'} bg={'#B5960F'}>
                                 Login
                             </Button>
                         </Link>
@@ -53,7 +53,7 @@ function Nav() {
                         <DrawerRoot>
                             <DrawerBackdrop />
                             <DrawerTrigger asChild>
-                                <Button variant="outline" size="sm">
+                                <Button variant="outline" size="sm" _dark={{ bg: '#B5960F' }} bg='#394C45' color={'white'}>
                                     Menu
                                 </Button>
                             </DrawerTrigger>
@@ -86,7 +86,7 @@ function Nav() {
                                         <Button w={'100%'} size={'xl'} variant={'subtle'}>
                                             Order Online
                                         </Button>
-                                        <Button w={'100%'} size={'xl'}>
+                                        <Button w={'100%'} size={'xl'} >
                                             Login
                                         </Button>
                                     </VStack>

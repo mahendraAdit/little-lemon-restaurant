@@ -8,19 +8,19 @@ const DatePickerComponent = ({ onDateChange, required = false, onInvalid }) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [isInvalid, setIsInvalid] = useState(false);
 
-    // Handle the date change and pass it to the parent
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
         setIsInvalid(false);
         if (onDateChange) {
-            onDateChange(date); // Call the parent component's callback with the selected date
+            onDateChange(date);
         }
     };
-    // Format the selected date to be displayed as text (optional)
-    const formattedDate = selectedDate ? selectedDate.toLocaleDateString() : 'Select a date';
+
+    const formattedDate = selectedDate ? selectedDate.toLocaleDateString() : 'SELECT A DATE';
     const handleBlur = () => {
         if (required && !selectedDate) {
-            setIsInvalid(true); // Set invalid state if the date is required but not selected
+            setIsInvalid(true);
             if (onInvalid) {
                 onInvalid('Date is required');
             }

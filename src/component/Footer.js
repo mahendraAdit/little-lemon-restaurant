@@ -28,30 +28,50 @@ function Footer() {
 
                     <GridItem p={3} display={'flex'} justifyContent={'center'}>
                         <HStack justifyContent={'center'} gap={5} wrap={'wrap'}>
-                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0}>
+                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0} color={'white'} _hover={{ color: 'black' }}
+                                _dark={{
+                                    color: "black",
+                                    _hover: { color: 'white' }
+                                }}>
                                 <FaFacebookF />
                             </Button>
-                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0}>
+                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0} color={'white'} _hover={{ color: 'black' }}
+                                _dark={{
+                                    color: "black",
+                                    _hover: { color: 'white' }
+                                }}>
                                 <FaInstagram />
                             </Button>
-                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0}>
+                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0} color={'white'} _hover={{ color: 'black' }}
+                                _dark={{
+                                    color: "black",
+                                    _hover: { color: 'white' }
+                                }}>
                                 <FaWhatsapp />
                             </Button>
-                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0}>
+                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0} color={'white'} _hover={{ color: 'black' }}
+                                _dark={{
+                                    color: "black",
+                                    _hover: { color: 'white' }
+                                }}>
                                 <FaEnvelope />
                             </Button>
-                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0}>
+                            <Button variant={'outline'} borderRadius={'full'} size={'xl'} p={0} color={'white'} _hover={{ color: 'black' }}
+                                _dark={{
+                                    color: "black",
+                                    _hover: { color: 'white' }
+                                }}>
                                 <FaYoutube />
                             </Button>
                         </HStack>
                     </GridItem>
                     <GridItem p={3} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                         <HStack fontSize={'md'} gap={5}>
-                            <Link>Home</Link>
-                            <Link>Menu</Link>
-                            <Link>Reservations</Link>
-                            <Link>Order</Link>
-                            <Link>Home</Link>
+                            <Link color={'white'}>Home</Link>
+                            <Link color={'white'}>Menu</Link>
+                            <Link color={'white'}>Reservations</Link>
+                            <Link color={'white'}>Order</Link>
+                            <Link color={'white'}>Home</Link>
                         </HStack>
                     </GridItem>
                 </Grid >)

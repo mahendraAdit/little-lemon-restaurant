@@ -1,13 +1,11 @@
-import { toaster } from "../components/ui/toaster";
 import {
     Grid, GridItem, Heading,
     Span, VStack, Box, HStack,
     Button, Text, Badge, Input,
-    For, useBreakpointValue
+    For, useBreakpointValue,
 } from "@chakra-ui/react";
 import React, { useState, useEffect, useRef } from 'react';
 import DatePickerComponent from "../component/DatePickerComponent";
-import ReservationForm from "../component/ReservationForm";
 import { fetchAPI, submitAPI } from '../api/api.js'
 import { FaMapMarkerAlt, FaCalendarAlt, FaIdCardAlt, FaDollarSign } from "react-icons/fa";
 import { format } from 'date-fns';
@@ -16,11 +14,14 @@ import NumberPicker from "../component/NumberPicker.js";
 import { Radio, RadioGroup } from "../components/ui/radio"
 import { MdEmail } from "react-icons/md";
 import { useFormik, Formik } from "formik";
-import * as Yup from 'yup';
+import OccasionPicker from "../component/OccasionPicker.js";
+import ReceiptDialog from "../component/ReceiptDialog.js";
 
 
 function Reservation() {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedReservation, setSelectedReservation] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
     const [validSchedule, setValidSchedule] = useState(false);
     const [timeOptions, setTimeOptions] = useState([]);
     const [response, setResponse] = useState(null);
@@ -32,29 +33,35 @@ function Reservation() {
     const scheduleRef = useRef(null);
     const personalInfoRef = useRef(null);
 
+    const handleOpenDialog = () => {
+        setIsDialogOpen(true);
+    };
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
+    };
+
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
             payment: 'cash',
             location: 'Chicago',
+            occasion: 'Meeting'
         },
         onSubmit: (values, { resetForm }) => {
-            selectDateRef.current.scrollIntoView({ behavior: "smooth" });
+
             const finalData = { ...scheduleFormData, ...values };
+            setFinalFormData(finalData);
             const res = submitAPI(finalData);
             setResponse(res);
 
-            toaster.create({
-                description: `Reservation for ${res.name} at ${res.date} success`,
-                type: "success",
-                duration: 6000
-            })
             setAvailableTimes([]);
             setSelectedReservation(null);
-
-
-            // console.log(`result submitting user: ${JSON.stringify(res)}`)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+            handleOpenDialog();
 
         },
         // validationSchema: Yup.object().shape({
@@ -68,12 +75,14 @@ function Reservation() {
 
     const [availableTimes, setAvailableTimes] = useState([]);
     const [scheduleFormData, setScheduleFormData] = useState({
-        person: 2,
+        person: '',
         date: new Date(),
-        day: new Date().toLocaleDateString('en-US', { weekday: 'long' })
+        day: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
+        time: ''
 
     });
-
+    const [finalFormData, setFinalFormData] = useState({
+    });
 
     useEffect(() => {
         const arr = availableTimes.map((item, index) => ({
@@ -88,7 +97,6 @@ function Reservation() {
         setValidSchedule(!validSchedule)
         formik.resetForm();
 
-
     }, [availableTimes, response]);
 
     useEffect(() => {
@@ -96,22 +104,31 @@ function Reservation() {
             personalInfoRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [selectedReservation]);
+    useEffect(() => {
+        // console.log(`isDialogOpen: ${isDialogOpen}`)
+    }, [isDialogOpen]);
 
-    const handleDateChange = (date) => {
-        setScheduleFormData((prevData) => ({ ...prevData, date }));
-        setError(null); // Clear error on valid input
+    const handleDateChange = (selectedDate) => {
+        setScheduleFormData((prevData) => ({
+            ...prevData,
+            date: selectedDate,
+            day: selectedDate.toLocaleDateString('en-US', { weekday: 'long' })
+        }));
+        setError(null);
     }
 
-    const handleNumberChange = (number) => {
-        setPax(number);
+    const handleNumberChange = (person) => {
+        setScheduleFormData((prevData) => ({ ...prevData, person }));
+        setPax(person);
     }
 
-    const handleReservationSelect = (id) => {
+    const handleReservationSelect = (id, val) => {
 
         if (selectedReservation === id) {
             setSelectedReservation(null);
 
         } else {
+            setScheduleFormData((prevData) => ({ ...prevData, time: val.time }))
             setSelectedReservation(id);
         }
 
@@ -119,6 +136,7 @@ function Reservation() {
     };
 
     const handleScheduleSubmit = (e) => {
+
         e.preventDefault();
         const times = fetchAPI(scheduleFormData.date);
         setAvailableTimes(times);
@@ -127,10 +145,12 @@ function Reservation() {
     };
 
     return (
+
         <>
+            <ReceiptDialog isOpen={isDialogOpen} onClose={handleCloseDialog} data={finalFormData} />
             <HStack p={3} my={2} rounded={'2xl'} shadow={'md'} w={'fit-content'} h={'50px'} ref={selectDateRef}>
                 <Span rounded={'full'} bg={'yellow.200'} >
-                    <Text fontWeight={'bolder'}>
+                    <Text fontWeight={'bolder'} _dark={{ color: "black" }}>
                         1
                     </Text>
                 </Span>
@@ -148,7 +168,7 @@ function Reservation() {
                             gap={2}
                         >
                             <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
-                                <Span rounded={'full'} bg={'blue.200'} p={3}>
+                                <Span rounded={'full'} bg={'blue.200'} p={3} _dark={{ color: 'black' }}>
                                     <FaMapMarkerAlt />
                                 </Span>
 
@@ -173,7 +193,7 @@ function Reservation() {
                             gap={2}
                         >
                             <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
-                                <Span rounded={'full'} bg={'green.200'} p={3}>
+                                <Span rounded={'full'} bg={'green.200'} p={3} _dark={{ color: 'black' }}>
                                     <FaCalendarAlt />
                                 </Span>
 
@@ -196,7 +216,7 @@ function Reservation() {
                             gap={2}
                         >
                             <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
-                                <Span rounded={'full'} bg={'yellow.200'} p={3}>
+                                <Span rounded={'full'} bg={'yellow.200'} p={3} _dark={{ color: 'black' }}>
                                     <IoPerson />
                                 </Span>
 
@@ -211,6 +231,7 @@ function Reservation() {
                             </GridItem>
                         </Grid>
                     </Box>
+
                     <Button variant={"solid"} type="submit" w={{ base: '100%', md: 'fit-content' }} size={{ base: 'xl', md: 'md' }} mt={{ base: 5, md: 0 }}>
                         Search
                     </Button>
@@ -220,7 +241,7 @@ function Reservation() {
                 timeOptions.length > 0 && (
                     <HStack p={3} mt={10} rounded={'2xl'} shadow={'md'} w={'fit-content'} h={'50px'}>
                         <Span rounded={'full'} bg={'yellow.200'} >
-                            <Text fontWeight={'bolder'}>
+                            <Text fontWeight={'bolder'} _dark={{ color: 'black' }}>
                                 2
                             </Text>
                         </Span>
@@ -230,12 +251,12 @@ function Reservation() {
                     </HStack>
                 )
             }
-            < Grid templateColumns={{ lg: 'repeat(5,1fr)' }} mt={3} gap={3} flex={'flex'} ref={scheduleRef}>
+            < Grid templateColumns={{ base: 'repeat(2,1fr)', md: 'repeat(3,1fr)', lg: 'repeat(5,1fr)' }} mt={3} gap={3} flex={'flex'} ref={scheduleRef}>
 
                 {
                     timeOptions.map((index) => (
                         <GridItem key={index.id} colSpan={1}>
-                            <Box bg={'blue.100'} w={'250'} h={'250'} p={5} rounded={'2xl'} opacity={selectedReservation && selectedReservation !== index.id ? 0.5 : 1}
+                            <Box bg={'#F8F4E3'} _dark={{ bg: '#333333' }} w={'250'} h={'250'} p={5} rounded={'2xl'} opacity={selectedReservation && selectedReservation !== index.id ? 0.5 : 1}
                             >
                                 <Heading size={'xl'} fontWeight={"bolder"}>
                                     <HStack>
@@ -258,7 +279,7 @@ function Reservation() {
                                 </Text>
                                 <Button
                                     onClick={() => {
-                                        handleReservationSelect(index.id)
+                                        handleReservationSelect(index.id, index)
                                     }}
                                     disabled={selectedReservation && selectedReservation !== index.id}
                                     mt={4}
@@ -292,7 +313,7 @@ function Reservation() {
                                 gap={2}
                             >
                                 <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
-                                    <Span rounded={'full'} bg={'red.200'} p={3}>
+                                    <Span rounded={'full'} bg={'red.200'} p={3} _dark={{ color: 'black' }}>
                                         <FaIdCardAlt />
                                     </Span>
 
@@ -315,7 +336,7 @@ function Reservation() {
                                 gap={2}
                             >
                                 <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
-                                    <Span rounded={'full'} bg={'green.200'} p={3}>
+                                    <Span rounded={'full'} bg={'green.200'} p={3} _dark={{ color: 'black' }}>
                                         <MdEmail />
                                     </Span>
 
@@ -337,7 +358,7 @@ function Reservation() {
                                 gap={2}
                             >
                                 <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
-                                    <Span rounded={'full'} bg={'green.200'} p={3}>
+                                    <Span rounded={'full'} bg={'green.200'} p={3} _dark={{ color: 'black' }}>
                                         <FaDollarSign />
                                     </Span>
 
@@ -360,15 +381,37 @@ function Reservation() {
                             </Grid>
 
                         </Box>
-                        <Button variant={"solid"} type="submit" w={{ base: '100%', md: 'fit-content' }} size={{ base: 'xl', md: 'md' }} mt={{ base: 5, md: 0 }}>
+                        <Box w={{ base: '100%', md: '50%' }} maxW={{ base: '100%', md: 'fit-content' }} >
+                            <Grid
+                                templateRows="repeat(2, 1fr)"
+                                templateColumns="repeat(5, 1fr)"
+                                gap={2}
+                            >
+                                <GridItem rowSpan={2} colSpan={1} display={'flex'} justifyContent={'end'} alignItems={'center'} mr={2}>
+                                    <Span rounded={'full'} bg={'green.200'} p={3} _dark={{ color: 'black' }}>
+                                        <FaCalendarAlt />
+                                    </Span>
+
+                                </GridItem>
+                                <GridItem colSpan={4} display={'flex'} alignItems={'end'}>
+                                    <Text fontSize={'xs'} fontWeight={'bold'}>
+                                        OCCASION
+                                    </Text>
+                                </GridItem>
+                                <GridItem colSpan={4} display={'flex'} alignItems={'start'} w={{ base: '100%', lg: '10vw' }}>
+                                    <OccasionPicker onSelectChange={formik.handleChange} id={'occasion'} />
+                                </GridItem>
+                            </Grid>
+                        </Box>
+                        <Button variant={"solid"} type="submit" w={{ base: '100%', lg: 'fit-content' }} size={{ base: 'xl', lg: 'md' }} mt={{ base: 5, md: 0 }}>
                             Order
                         </Button>
-
-
                     </HStack>
                 </Grid>
 
             </form >
+
+
 
         </>
     );
